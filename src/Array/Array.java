@@ -85,4 +85,26 @@ public class Array {
         return -1;
     }
 
+    //从数组中删除index位置的元素,返回被删除的元素
+    public int remove(int index){
+        if(index<0 || index>=size)
+            throw new IllegalArgumentException("Error index");
+        int temp=data[index];
+        for(int i=index;i<size;i++)
+            data[i]=data[i+1];
+        size--;//不要忘记改变size
+        return temp;
+    }
+    public int removeFirst(){
+        return remove(0);
+    }
+    public int removeLast(){
+        return remove(size-1);
+    }
+    //从数组中删除元素e
+    public void remoceElement(int e){
+        int index=find(e);
+        if(index!=-1)
+            remove(index);
+    }
 }

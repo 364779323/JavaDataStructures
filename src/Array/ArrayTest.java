@@ -12,6 +12,9 @@ public class ArrayTest {
 
         arr.addFirst(-1);
         System.out.println(arr);
+        
+        System.out.println(arr.removeFirst());
+        System.out.println(arr);
     }
 
 
