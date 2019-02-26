@@ -68,4 +68,21 @@ public class Array {
             throw  new IllegalArgumentException("Set failed.index is illegal");
         data[index]=value;
     }
+
+    public boolean contains(int e){
+        for(int i=0;i<size;i++){
+            if(data[i]==e)
+                return true;
+        }
+        return false;
+    }
+    //查找数组中元素e所在的索引，如果不存在元素e，则返回-1
+    public int find(int e){
+        for(int i=0;i<size;i++){
+            if(data[i]==e)
+                return i;
+        }
+        return -1;
+    }
+
 }
