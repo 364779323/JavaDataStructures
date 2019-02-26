@@ -1,36 +1,36 @@
 package Array;
 
-public class Array {
-    private int[] data;
+public class Array<E> {
+    private E[] data;
     private int size;//当前的元素个数
 
     //有参构造函数
     public Array(int capacity){
-        data=new int[capacity];
+        data=(E[]) new Object[capacity];
         size=0;
     }
+    //this()能在无参构造函数中调用有参构造函数
     //无参构造函数
     public Array(){
         //默认capacity为10
-        data=new int[10];
-        size=0;
+        this(10);
     }
     public int getSize(){
         return size;
     }
-    public int getLast(){
+    public E getLast(){
         return data[size];
     }
-    public void addLast(int e){
+    public void addLast(E e){
         addIndex(size,e);
     }
-    public void addFirst(int e){
+    public void addFirst(E e){
         addIndex(0,e);
     }
     public boolean isEmpty(){
         return (size==0);
     }
-    public void addIndex(int index,int e){
+    public void addIndex(int index,E e){
         if(size==data.length)
             throw new IllegalArgumentException("can't add now,Array is full");
         if(index<0 || index>size)
@@ -57,52 +57,53 @@ public class Array {
     }
 
     //获取index索引位置的元素
-    public int get(int index){
+    public E get(int index){
         if(index<0 || index>=size)
             throw new IllegalArgumentException("Get failed.index is illegal.");
         return data[index];
     }
     //改变index索引位置的元素
-    public void set(int index,int value){
+    public void set(int index,E value){
         if(index<0 || index >=size)
             throw  new IllegalArgumentException("Set failed.index is illegal");
         data[index]=value;
     }
-
-    public boolean contains(int e){
+    //equals为值比较 ==为引用比较
+    public boolean contains(E e){
         for(int i=0;i<size;i++){
-            if(data[i]==e)
+            if(data[i].equals(e))
                 return true;
         }
         return false;
     }
     //查找数组中元素e所在的索引，如果不存在元素e，则返回-1
-    public int find(int e){
+    public int find(E e){
         for(int i=0;i<size;i++){
-            if(data[i]==e)
+            if(data[i].equals(e))
                 return i;
         }
         return -1;
     }
 
     //从数组中删除index位置的元素,返回被删除的元素
-    public int remove(int index){
+    public E remove(int index){
         if(index<0 || index>=size)
             throw new IllegalArgumentException("Error index");
-        int temp=data[index];
+        E temp=data[index];
         for(int i=index;i<size;i++)
             data[i]=data[i+1];
         size--;//不要忘记改变size
+        data[size]=null;//loitering objects != memory leak
         return temp;
     }
-    public int removeFirst(){
+    public E removeFirst(){
         return remove(0);
     }
-    public int removeLast(){
+    public E removeLast(){
         return remove(size-1);
     }
     //从数组中删除元素e
-    public void remoceElement(int e){
+    public void remoceElement(E e){
         int index=find(e);
         if(index!=-1)
             remove(index);
