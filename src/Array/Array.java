@@ -31,16 +31,25 @@ public class Array<E> {
         return (size==0);
     }
     public void addIndex(int index,E e){
-        if(size==data.length)
-            throw new IllegalArgumentException("can't add now,Array is full");
         if(index<0 || index>size)
             throw new IllegalArgumentException("can't add now");
 
+        if(size==data.length)
+            resize(2*data.length);
         for(int i=size;i>=index;i--){
             data[i+1]=data[i];
         }
         data[index]=e;
         size++;
+    }
+
+    //应声明为private 禁止用户主动的改变数组的大小
+    private void resize(int newCapacity){
+        E[] arr=(E[])new Object[newCapacity];
+        for(int i=0;i<size;i++){
+            arr[i]=data[i];
+        }
+        data=arr;
     }
     @Override
     public String toString(){
