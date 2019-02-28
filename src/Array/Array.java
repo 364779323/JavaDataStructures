@@ -21,6 +21,10 @@ public class Array<E> {
         return size;
     }
 
+    public int getCapacity(){
+        return data.length;
+    }
+
     public E getLast() {
         return data[size];
     }
