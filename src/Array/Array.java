@@ -26,9 +26,11 @@ public class Array<E> {
     }
 
     public E getLast() {
-        return data[size];
+        return get(size-1);
     }
-
+    public E getFirst(){
+        return data[0];
+    }
     public void addLast(E e) {
         addIndex(size, e);
     }
@@ -78,8 +80,8 @@ public class Array<E> {
         res.append("[");
         for (int i = 0; i < size; i++) {
             res.append(data[i]);
-            if (i != size - 1)
-                res.append(", ");
+//            if (i != size - 1)
+//                res.append(", ");
         }
         res.append("]");
         return res.toString();
